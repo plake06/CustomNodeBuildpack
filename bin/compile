@@ -2,7 +2,7 @@
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 set -e
-set -o pipefail   # don't ignore exit codes when piping output
+set -o pipefail   # dont ignore exit codes when piping output
 set -o nounset    # fail on unset variables
 unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
 
@@ -22,17 +22,6 @@ mkdir -p "$BUILD_DIR/.heroku/node/"
 cd $BUILD_DIR
 export PATH="$BUILD_DIR/.heroku/node/bin":$PATH
 
-cd ./../oracle
-unzip instantclient-basic-linux.x64-12.1.0.2.0.zip
-unzip instantclient-sdk-linux.x64-12.1.0.2.0.zip
-mv instantclient_12_1 instantclient
-cd instantclient
-ln -s libclntsh.so.12.1 libclntsh.so
-
-export LD_LIBRARY_PATH="/../oracle/instantclient":$LD_LIBRARY_PATH
-export OCI_LIB_DIR="/../oracle/instantclient"
-export OCI_INC_DIR="/../oracle/instantclient/sdk/include"
-
 # CF Common
 export BUILDPACK_PATH=$BP_DIR
 source $BP_DIR/compile-extensions/lib/common
@@ -49,7 +38,7 @@ source $BP_DIR/lib/environment.sh
 source $BP_DIR/lib/binaries.sh
 source $BP_DIR/lib/cache.sh
 source $BP_DIR/lib/dependencies.sh
-#source $BP_DIR/lib/oracletest.sh
+source $BP_DIR/lib/vendor/new_relic/install.sh $BUILD_DIR
 
 ### Handle errors
 
@@ -79,6 +68,7 @@ create_env() {
   write_profile "$BP_DIR" "$BUILD_DIR"
   export_env_dir "$ENV_DIR"
   create_default_env
+  add_oracle_env "$BUILD_DIR/.heroku"
 }
 
 header "Creating runtime environment"
@@ -107,7 +97,6 @@ install_bins() {
     install_nodejs "$node_engine" "$BUILD_DIR/.heroku/node"
     install_npm "$npm_engine" "$BUILD_DIR/.heroku/node"
   fi
-  warn_old_npm
 }
 
 header "Installing binaries"
@@ -134,6 +123,7 @@ header "Restoring cache"
 restore_cache | output "$LOG_FILE"
 
 build_dependencies() {
+  install_oracle_libraries "$BUILD_DIR/.heroku"
   if $PREBUILD; then
     echo "Prebuild detected (node_modules already exists)"
     rebuild_node_modules "$BUILD_DIR"
@@ -169,6 +159,8 @@ summarize_build() {
   cd $BUILD_DIR
   (npm ls --depth=0 | tail -n +2 || true) 2>/dev/null
 }
+
+
 
 header "Build succeeded!"
 summarize_build | output "$LOG_FILE"

@@ -1,3 +1,109 @@
+v1.5.23 Nov 09, 2016
+=====================
+
+* Add node 7.1.0
+  (https://www.pivotaltracker.com/story/show/133966203)
+
+* Add node 7.0.0
+  (https://www.pivotaltracker.com/story/show/133105865)
+
+* Add node 6.9.1, remove node 6.8.1
+  (https://www.pivotaltracker.com/story/show/132796533)
+
+* Add node 4.6.2, remove node 4.6.0
+  (https://www.pivotaltracker.com/story/show/133955125)
+
+* Remove node 0.10.47 and 0.10.48
+  - Node.js 0.10.x support ends on October 31st, 2016
+  - Node.js 0.10.x will no longer be in the nodejs-buildpack
+  (https://www.pivotaltracker.com/story/show/132026695)
+
+* Ensure all downloaded binaries have checksums verified
+  (https://www.pivotaltracker.com/story/show/128099189)
+
+* Remove vendored node binary executable
+  (https://www.pivotaltracker.com/story/show/128498051)
+
+v1.5.22 Oct 19, 2016
+=====================
+
+* Add node 6.9.0 and 6.8.1, remove node 6.6.0 and 6.7.0
+  (https://www.pivotaltracker.com/story/show/132362527)
+  (https://www.pivotaltracker.com/story/show/132362087)
+  (https://www.pivotaltracker.com/story/show/132198199)
+  (https://www.pivotaltracker.com/story/show/132691907)
+
+* Add node 0.10.48, remove node 0.10.46
+  (https://www.pivotaltracker.com/story/show/132686391)
+
+* Add node 0.12.17, remove node 0.12.15
+  (https://www.pivotaltracker.com/story/show/132686391)
+
+* Add node 4.6.1, remove node 4.5.0
+  (https://www.pivotaltracker.com/story/show/132686391)
+
+* Address USN-3087-1: OpenSSL vulnerabilities with node 6.8.1 and 6.9.0
+  (https://www.pivotaltracker.com/story/show/130992485)
+
+* NOTICE: Node.js 0.10 will be removed after October 31, 2016 due to end of LTS
+  (https://www.pivotaltracker.com/story/show/132026695)
+
+v1.5.21 Sep 28, 2016
+=====================
+
+* Address USN-3087-1: OpenSSL vulnerabilities by updating node.
+  The new versions of node included in this buildpack are built
+  against the patched version of OpenSSL
+  (https://www.pivotaltracker.com/story/show/130945067)
+
+* Add node 0.10.47, remove node 0.10.45
+  (https://www.pivotaltracker.com/story/show/131225127)
+
+* Add node 0.12.16, remove node 0.12.14
+  (https://www.pivotaltracker.com/story/show/131225127)
+
+* Add node 4.6.0, remove node 4.4.7
+  (https://www.pivotaltracker.com/story/show/131225127)
+
+* Add node 6.7.0, remove node 6.5.0
+  (https://www.pivotaltracker.com/story/show/131225127)
+
+v1.5.20 Sep 19, 2016
+=====================
+
+* Add node 6.6.0, remove node 6.4.0
+  (https://www.pivotaltracker.com/story/show/130488207)
+
+* Remove Heroku references from staging output
+  (https://www.pivotaltracker.com/story/show/127931269)
+
+v1.5.19 Sep 01, 2016
+=====================
+
+* Add node 4.5.0, remove node 4.4.6
+  (https://www.pivotaltracker.com/story/show/128431641)
+
+* Add node 6.4.0, remove node 6.3.0
+  (https://www.pivotaltracker.com/story/show/128863283)
+
+* Add node 6.5.0, remove node 6.3.1
+  (https://www.pivotaltracker.com/story/show/129366607)
+
+* Add support for New Relic configuration through service binding
+  (https://www.pivotaltracker.com/story/show/110040634)
+
+* Filter credentials from dependency urls printed during staging
+  (https://www.pivotaltracker.com/story/show/126514693)
+
+* Add default_versions support for specifying node default version
+  (https://www.pivotaltracker.com/story/show/126394943)
+
+v1.5.18 Jul 25, 2016
+=====================
+
+* Add nodejs 6.3.1, remove nodejs 6.2.2
+  (https://www.pivotaltracker.com/story/show/126830705)
+
 v1.5.17 Jul 15, 2016
 =====================
 

@@ -2,8 +2,11 @@ $: << 'cf_spec'
 require 'spec_helper'
 
 describe 'CF NodeJS Buildpack' do
-  subject(:app) { Machete.deploy_app(app_name) }
-  let(:browser) { Machete::Browser.new(app) }
+  subject(:app)           { Machete.deploy_app(app_name) }
+  let(:browser)           { Machete::Browser.new(app) }
+  let(:buildpack_dir)     { File.join(File.dirname(__FILE__), '..', '..') }
+  let(:version_file)      { File.join(buildpack_dir, 'VERSION') }
+  let(:buildpack_version) { File.read(version_file).strip }
 
   after do
     Machete::CF::DeleteApp.new.execute(app)
@@ -54,6 +57,10 @@ describe 'CF NodeJS Buildpack' do
 
       browser.visit_path('/')
       expect(browser).to have_body('Hello, World!')
+    end
+
+    it 'correctly displays the buildpack version' do
+      expect(app).to have_logged "node.js #{buildpack_version}"
     end
   end
 
@@ -164,11 +171,15 @@ describe 'CF NodeJS Buildpack' do
     context 'with no npm version specified' do
       let (:app_name) { 'node_web_app_airgapped_no_npm_version' }
 
+      subject(:app) do
+        Machete.deploy_app(app_name, env: {'BP_DEBUG' => '1'})
+      end
 
       it 'is running with the default version of npm' do
         expect(app).to be_running
         expect(app).not_to have_internet_traffic
         expect(app).to have_logged("Using default npm version")
+        expect(app).to have_logged('DEBUG: default_version_for node is')
       end
     end
 
