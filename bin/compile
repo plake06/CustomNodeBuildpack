@@ -160,8 +160,6 @@ summarize_build() {
   (npm ls --depth=0 | tail -n +2 || true) 2>/dev/null
 }
 
-
-
 header "Build succeeded!"
 summarize_build | output "$LOG_FILE"
 
