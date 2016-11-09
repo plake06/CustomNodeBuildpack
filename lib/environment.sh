@@ -45,11 +45,3 @@ write_export() {
   echo "export PATH=\"$build_dir/.heroku/node/bin:\$PATH:$build_dir/node_modules/.bin\"" > $bp_dir/export
   echo "export NODE_HOME=\"$build_dir/.heroku/node\"" >> $bp_dir/export
 }
-
-
-add_oracle_env(){
-    local build_dir="$1"
-        export LD_LIBRARY_PATH=$build_dir/oracle/instantclient:${LD_LIBRARY_PATH:-}
-    export OCI_LIB_DIR=$build_dir/oracle/instantclient
-    export OCI_INC_DIR=$build_dir/oracle/instantclient/sdk/include
-  }

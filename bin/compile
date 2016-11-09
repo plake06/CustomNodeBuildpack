@@ -65,7 +65,6 @@ warn_missing_package_json "$BUILD_DIR"
 ### Compile
 
 create_env() {
-  add_oracle_env "$BUILD_DIR/.heroku"
   write_profile "$BP_DIR" "$BUILD_DIR"
   export_env_dir "$ENV_DIR"
   create_default_env
@@ -123,7 +122,6 @@ header "Restoring cache"
 restore_cache | output "$LOG_FILE"
 
 build_dependencies() {
-  install_oracle_libraries "$BUILD_DIR/.heroku"
   if $PREBUILD; then
     echo "Prebuild detected (node_modules already exists)"
     rebuild_node_modules "$BUILD_DIR"
@@ -159,8 +157,6 @@ summarize_build() {
   cd $BUILD_DIR
   (npm ls --depth=0 | tail -n +2 || true) 2>/dev/null
 }
-
-
 
 header "Build succeeded!"
 summarize_build | output "$LOG_FILE"
